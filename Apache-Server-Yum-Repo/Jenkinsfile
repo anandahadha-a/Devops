@@ -1,0 +1,32 @@
+  
+pipeline {
+	agent {
+		label 'master'
+	}
+
+	stages {
+		stage ('building server') {
+			steps {
+				dir('server') {
+					sh './build_server'
+				}
+			}
+		}
+
+		stage('bulding client') {
+			steps {
+				dir('client') {
+					sh './build_client'
+				}
+			}
+		}
+
+		stage('Testing client') {
+			steps {
+				dir('client') {
+					sh './test_httpd'
+				}
+			}
+		}
+	}
+}

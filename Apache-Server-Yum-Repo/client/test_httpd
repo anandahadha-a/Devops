@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+result=$(docker run --rm docker_client:latest 'rpm -qa' | grep httpd
+
+if [ $result ]
+then
+	echo "httpd is installed correctly"
+	exit 0
+else
+	echo "httod is not installed coorectly"
+	exit 1
+fi

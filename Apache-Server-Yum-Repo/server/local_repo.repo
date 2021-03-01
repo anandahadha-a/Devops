@@ -1,0 +1,6 @@
+[local_repo]
+name=local_repo
+metadata_expire=-1
+enabled=1
+gpgcheck=0
+baseurl=http://172.17.0.1:8888/packages/

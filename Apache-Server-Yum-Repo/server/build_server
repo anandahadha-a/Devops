@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# stop the container
+STOP =`docker ps | grep docker_server | awk '{ print $1 }'`
+if [ $STOP ]
+then
+	docker stop docker_server
+	echo "stopped previously running docker_server container"
+fi
+
+# remove the container
+RMC=`docker ps -a | grep yum_server | awk '{ print $1 }'`
+if [ $RMC ]
+then
+	docker rm -f docker_server
+	echo "removed previous docker_server container"
+fi
+
+# build the image
+docker build . -t anandahadha/apache_server:latest
+
+# run a container of the newly created image 
+docker run \
+	-it -d \
+	--name docker_server \
+	-p 8888:80 \
+	anandahadha/apache_server:latest
